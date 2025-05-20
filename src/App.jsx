@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import NoteForm from './components/NoteForm';
+import NoteList from './components/NoteList';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [notes, setNotes] = useState(() => {
+    const storedNotes = localStorage.getItem('notes');
+    return storedNotes ? JSON.parse(storedNotes) : [];
+  });
+  const [editingNote, setEditingNote] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(notes));
+  }, [notes]);
+
+  useEffect(() => {
+    if (editingNote && notes.some(n => n.id === editingNote.id)) {
+      setEditingNote(null);
+    }
+  }, [notes]);
+
+  const addOrUpdateNote = (note) => {
+    if (editingNote) {
+      setNotes(prevNotes =>
+        prevNotes.map((n) =>
+          n.id === editingNote.id ? { ...note, id: editingNote.id } : n
+        )
+      );
+    } else {
+      setNotes(prevNotes => [...prevNotes, { ...note, id: Date.now() }]);
+    }
+  };
+
+  const editNote = (note) => {
+    setEditingNote(note);
+  };
+
+  const deleteNote = (id) => {
+    setNotes(prevNotes => prevNotes.filter((note) => note.id !== id));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <h1>Notes Blog</h1>
+      <NoteForm onSubmit={addOrUpdateNote} initialNote={editingNote} />
+      <NoteList notes={notes} onEdit={editNote} onDelete={deleteNote} />
+    </div>
+  );
 }
 
-export default App
+export default App;
