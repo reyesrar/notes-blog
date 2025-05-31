@@ -10,6 +10,7 @@ function App() {
   });
   const [editingNote, setEditingNote] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [deleteMode, setDeleteMode] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
@@ -38,12 +39,15 @@ function App() {
   };
 
   const handleEditNote = (note) => {
-    setEditingNote(note);
-    setShowModal(true);
-  };
-
-  const deleteNote = (id) => {
-    setNotes(prevNotes => prevNotes.filter((note) => note.id !== id));
+    if (deleteMode) {
+      if (window.confirm(`¿Seguro que deseas eliminar la nota "${note.title}"?`)) {
+        setNotes(prevNotes => prevNotes.filter((n) => n.id !== note.id));
+      }
+      setDeleteMode(false);
+    } else {
+      setEditingNote(note);
+      setShowModal(true);
+    }
   };
 
   const PREVIEW_LENGTH = 22;
@@ -57,13 +61,20 @@ function App() {
         >
           + Nueva Nota
         </div>
+        <div
+          className={`sidebar-delete-btn${deleteMode ? ' active' : ''}`}
+          onClick={() => setDeleteMode(dm => !dm)}
+        >
+          {deleteMode ? 'Seleccione' : 'Eliminar Nota'}
+        </div>
       </div>
       <div className="main-content">
         <NoteList
           notes={notes}
           onEdit={handleEditNote}
-          onDelete={deleteNote}
+          onDelete={() => {}} // Puede omitirse si NoteList y NoteItem no lo requieren, pero se deja para compatibilidad
           previewLength={PREVIEW_LENGTH}
+          deleteMode={deleteMode}
         />
       </div>
       {showModal && (
