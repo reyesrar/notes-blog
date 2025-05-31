@@ -9,15 +9,10 @@ function App() {
     return storedNotes ? JSON.parse(storedNotes) : [];
   });
   const [editingNote, setEditingNote] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
-  }, [notes]);
-
-  useEffect(() => {
-    if (editingNote && notes.some(n => n.id === editingNote.id)) {
-      setEditingNote(null);
-    }
   }, [notes]);
 
   const addOrUpdateNote = (note) => {
@@ -32,19 +27,58 @@ function App() {
     }
   };
 
-  const editNote = (note) => {
+  const handleCreateNote = () => {
+    setEditingNote(null);
+    setShowModal(true);
+  };
+
+  const handleFormSubmit = (note) => {
+    addOrUpdateNote(note);
+    setShowModal(false);
+  };
+
+  const handleEditNote = (note) => {
     setEditingNote(note);
+    setShowModal(true);
   };
 
   const deleteNote = (id) => {
     setNotes(prevNotes => prevNotes.filter((note) => note.id !== id));
   };
 
+  const PREVIEW_LENGTH = 22;
+
   return (
-    <div className="App">
-      <h1>Notes Blog</h1>
-      <NoteForm onSubmit={addOrUpdateNote} initialNote={editingNote} />
-      <NoteList notes={notes} onEdit={editNote} onDelete={deleteNote} />
+    <div className="App app-flex">
+      <div className="sidebar">
+        <div
+          className="sidebar-create-btn"
+          onClick={handleCreateNote}
+        >
+          + Nueva Nota
+        </div>
+      </div>
+      <div className="main-content">
+        <NoteList
+          notes={notes}
+          onEdit={handleEditNote}
+          onDelete={deleteNote}
+          previewLength={PREVIEW_LENGTH}
+        />
+      </div>
+      {showModal && (
+        <div
+          className="modal-overlay"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="modal-content"
+            onClick={e => e.stopPropagation()}
+          >
+            <NoteForm onSubmit={handleFormSubmit} initialNote={editingNote} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
