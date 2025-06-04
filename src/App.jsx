@@ -11,6 +11,8 @@ function App() {
   const [editingNote, setEditingNote] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
+  const [viewMode, setViewMode] = useState('grid');
+  const [columns, setColumns] = useState(5);
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
@@ -50,7 +52,17 @@ function App() {
     }
   };
 
-  const PREVIEW_LENGTH = 22;
+  const handleChangeColumns = () => {
+    setColumns(prev => prev === 5 ? 1 : prev + 1);
+  };
+
+  const getPreviewLength = () => {
+    if (columns === 1) return 400;
+    if (columns === 2) return 180;
+    if (columns === 3) return 80;
+    if (columns === 4) return 40;
+    return 22;
+  };
 
   return (
     <div className="App app-flex">
@@ -59,22 +71,29 @@ function App() {
           className="sidebar-create-btn"
           onClick={handleCreateNote}
         >
-          + Nueva Nota
+          + New Note
         </div>
         <div
           className={`sidebar-delete-btn${deleteMode ? ' active' : ''}`}
           onClick={() => setDeleteMode(dm => !dm)}
         >
-          {deleteMode ? 'Seleccione' : 'Eliminar Nota'}
+          {deleteMode ? 'Select Note' : 'Delete Note'}
+        </div>
+        <div
+          className="sidebar-view-btn"
+          onClick={handleChangeColumns}
+        >
+          View {columns}x{columns}
         </div>
       </div>
       <div className="main-content">
         <NoteList
           notes={notes}
           onEdit={handleEditNote}
-          onDelete={() => {}} // Puede omitirse si NoteList y NoteItem no lo requieren, pero se deja para compatibilidad
-          previewLength={PREVIEW_LENGTH}
+          onDelete={() => {}}
+          previewLength={getPreviewLength()}
           deleteMode={deleteMode}
+          columns={columns}
         />
       </div>
       {showModal && (
