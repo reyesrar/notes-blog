@@ -177,7 +177,7 @@ body {
   min-width: 0;
   background: #f3f6fa;
   border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13), 0 1.5px 6px rgba(0,0,0,0.10);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -236,6 +236,24 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 2px;
+}
+
+.note-item-title {
+  font-weight: bold;
+  color: #000;
+  font-size: 1.05rem; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.note-item-separator {
+  border: none;
+  border-top: 1.5px solid #d0d7e2;
+  margin: 6px 0 8px 0;
+  width: 100%;
+  opacity: 0.7;
 }
 
 .note-item-cols-1 .note-item-title {
@@ -485,3 +503,79 @@ form button[type="submit"]:hover {
 .logout-btn:hover {
   background: #b71c1c;
 }
+
+.noteform-color-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.noteform-color-row input[type="color"] {
+  display: none;
+}
+
+.noteform-color-options {
+  display: flex;
+  gap: 8px;
+}
+
+.noteform-color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #bbb;
+  cursor: pointer;
+  background: #fff;
+  transition: border 0.2s;
+  outline: none;
+  display: inline-block;
+}
+.noteform-color-swatch.selected,
+.noteform-color-swatch:focus {
+  border: 2.5px solid #0078d4;
+}
+
+.noteform-color-swatch.color-white { background: #fff; }
+.noteform-color-swatch.color-red { background: #ffb3b3; }
+.noteform-color-swatch.color-yellow { background: #fff9b3; }
+.noteform-color-swatch.color-green { background: #b3ffcc; }
+.noteform-color-swatch.color-blue { background: #b3d8ff; }
+.noteform-color-swatch.color-purple { background: #e0b3ff; }
+
+.noteitem-color-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  user-select: none;
+}
+
+.noteitem-color-options {
+  display: flex;
+  gap: 6px;
+}
+
+.noteitem-color-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #bbb;
+  cursor: pointer;
+  background: #fff;
+  transition: border 0.2s;
+  outline: none;
+  display: inline-block;
+}
+.noteitem-color-swatch.selected,
+.noteitem-color-swatch:focus {
+  border: 2.5px solid #0078d4;
+}
+
+.noteitem-color-swatch.color-white { background: #fff; }
+.noteitem-color-swatch.color-red { background: #ffb3b3; }
+.noteitem-color-swatch.color-yellow { background: #fff9b3; }
+.noteitem-color-swatch.color-green { background: #b3ffcc; }
+.noteitem-color-swatch.color-blue { background: #b3d8ff; }
+.noteitem-color-swatch.color-purple { background: #e0b3ff; }

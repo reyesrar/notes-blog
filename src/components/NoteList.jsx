@@ -1,7 +1,7 @@
 import React from 'react';
 import NoteItem from './NoteItem';
 
-function NoteList({ notes, onEdit, onDelete, previewLength, deleteMode, columns }) {
+function NoteList({ notes, onEdit, onDelete, previewLength, deleteMode, columns, onColorChange }) {
   return (
     <div className={`notes-grid-container${columns === 1 ? ' notes-grid-container-horizontal' : ''}`}>
       {notes.length === 0 ? (
@@ -17,6 +17,7 @@ function NoteList({ notes, onEdit, onDelete, previewLength, deleteMode, columns 
               previewLength={previewLength}
               deleteMode={deleteMode}
               columns={columns}
+              onColorChange={onColorChange}
             />
           ))}
         </div>

@@ -20,11 +20,12 @@ function NoteItem({ note, onEdit, previewLength = 50, deleteMode, columns }) {
   return (
     <div
       className={`note-item note-item-cols-${columns}${deleteMode ? ' note-item-delete-mode' : ''}`}
+      style={deleteMode ? {} : { background: note.color || '#fff' }}
       onClick={() => onEdit(note)}
       title={deleteMode ? 'Click to delete this note' : undefined}
     >
-      <p className="note-item-title">{note.title}</p>
-      <p className="note-item-content">
+      <p className="note-item-title" style={{ color: '#181818' }}>{note.title}</p>
+      <p className="note-item-content" style={{ color: '#181818' }}>
         {getPreview(note.content, columns)}
       </p>
     </div>

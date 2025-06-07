@@ -192,6 +192,14 @@ function App() {
     setUser(null);
   };
 
+  const handleColorChange = (note, color) => {
+    setNotes(prevNotes =>
+      prevNotes.map(n =>
+        n.id === note.id ? { ...n, color } : n
+      )
+    );
+  };
+
   if (!user) {
     return <Login onLogin={setUser} />;
   }
@@ -218,7 +226,7 @@ function App() {
           className="sidebar-view-btn"
           onClick={handleChangeColumns}
         >
-          View {columns}x{columns}
+          View {columns === 1 ? 'Cards' : columns === 2 ? 'Ladder' : columns === 3 ? 'Compact' : columns === 4 ? 'Minimal' : 'Full'}
         </div>
         <div className="sidebar-logout-btn">
           <button
@@ -237,6 +245,7 @@ function App() {
           previewLength={getPreviewLength()}
           deleteMode={deleteMode}
           columns={columns}
+          onColorChange={handleColorChange}
         />
       </div>
       {showModal && (
