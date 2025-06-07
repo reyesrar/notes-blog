@@ -1,12 +1,16 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Note Blog app for Frameworks course proyect#1 at Rafael Urdaneta University 
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Create, Read, Update and Delete notes (CRUD).
+- Login credentials and verification.
+- Notes must be created as adaptive components (multiple versions).
+- Notes must contain maximum width and height, and crop when out of bounds.
+- Must be a way to select a note and visualize full content in a popup.
 
-## Expanding the ESLint configuration
+## Additional features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Notes personalization (color).
+- When deleting a note: delete note button changes, all notes become pale and turns red when hover to clarify the user that they're in "deleting mode". Alert to confirm if deletion of note.
