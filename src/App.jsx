@@ -226,7 +226,7 @@ function App() {
           className="sidebar-view-btn"
           onClick={handleChangeColumns}
         >
-          View {columns === 1 ? 'Cards' : columns === 2 ? 'Ladder' : columns === 3 ? 'Compact' : columns === 4 ? 'Minimal' : 'Full'}
+          {columns === 1 ? 'Cards' : columns === 2 ? 'Ladder' : columns === 3 ? 'Compact' : columns === 4 ? 'Minimal' : 'Full'} Layout
         </div>
         <div className="sidebar-logout-btn">
           <button
