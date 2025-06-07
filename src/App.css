@@ -28,18 +28,21 @@ body {
   min-width: 120px;
   max-width: 120px;
   flex: 0 0 120px;
-  background: #e0e7ef;
-  padding: 24px 8px;
-  border-radius: 12px 0 0 12px;
+  background: #0078d4;
+  padding: 24px 0 24px 0;
+  border-radius: 0;
   min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 2px;
+  margin-right: 0;
   position: relative;
+  border-right: 3px solid #005fa3;
 }
 
-.sidebar-create-btn {
+.sidebar-create-btn,
+.sidebar-delete-btn,
+.sidebar-view-btn {
   background: #0078d4;
   color: #fff;
   border-radius: 8px;
@@ -48,15 +51,18 @@ body {
   font-weight: bold;
   margin-bottom: 16px;
   text-align: center;
-  transition: background 0.2s;
+  transition: background 0.2s, box-shadow 0.2s;
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
   font-size: 1rem;
   display: block;
+  box-shadow: 0 3px 12px rgba(0, 80, 180, 0.18), 0 1.5px 6px rgba(0, 80, 180, 0.10);
+  border: none;
 }
 
-.sidebar-create-btn:hover {
+.sidebar-create-btn:hover,
+.sidebar-view-btn:hover {
   background: #005fa3;
 }
 
@@ -579,3 +585,37 @@ form button[type="submit"]:hover {
 .noteitem-color-swatch.color-green { background: #b3ffcc; }
 .noteitem-color-swatch.color-blue { background: #b3d8ff; }
 .noteitem-color-swatch.color-purple { background: #e0b3ff; }
+
+.notes-grid-container,
+.notes-grid-container-horizontal,
+.main-content,
+body,
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.notes-grid-container::-webkit-scrollbar,
+.notes-grid-container-horizontal::-webkit-scrollbar,
+.main-content::-webkit-scrollbar,
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  display: none;
+}
+
+.sidebar-user {
+  width: 100%;
+  background: #005fa3;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.22rem;
+  text-align: center;
+  padding: 26px 0 16px 0;
+  margin-bottom: 18px;
+  letter-spacing: 0.7px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  border-bottom: 3px solid #004c87;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.18), 0 1px 2px rgba(0,0,0,0.13);
+}
