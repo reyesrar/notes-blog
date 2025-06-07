@@ -14,3 +14,4 @@ Note Blog app for Frameworks course proyect#1 at Rafael Urdaneta University
 
 - Notes personalization (color).
 - When deleting a note: delete note button changes, all notes become pale and turns red when hover to clarify the user that they're in "deleting mode". Alert to confirm if deletion of note.
+- Vercel link: https://notes-blog-three.vercel.app/ (no reactive).
